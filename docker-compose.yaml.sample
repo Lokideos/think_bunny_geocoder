@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: 'think-micro-rmq'
+    hostname: 'node1'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - think-micro-network
+    volumes:
+      - 'rabbitmq:/var/lib/rabbitmq'
+
+networks:
+  think-micro-network:
+    driver: bridge
+
+volumes:
+  rabbitmq:

@@ -17,14 +17,16 @@ module AdsService
     end
 
     def start
-      @reply_queue.subscribe do |_delivery_info, _properties, _payload|
-        @lock.synchronize { @condition.signal }
+      @reply_queue.subscribe do |_delivery_info, properties, _payload|
+        @lock.synchronize { @condition.signal } if properties[:correlation_id] == @correlation_id
       end
 
       self
     end
 
     private
+
+    attr_writer :correlation_id
 
     def create_queue
       channel = RabbitMq.channel
@@ -37,8 +39,15 @@ module AdsService
     end
 
     def publish(payload, opts = {})
+      self.correlation_id = SecureRandom.uuid
+
       @lock.synchronize do
-        @queue.publish(payload, opts.merge(app_id: 'geocoder', reply_to: @reply_queue.name))
+        @queue.publish(
+          payload,
+          opts.merge(app_id: 'geocoder',
+                     correlation_id: @correlation_id,
+                     reply_to: @reply_queue.name)
+        )
 
         @condition.wait(@lock)
       end

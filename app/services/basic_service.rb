@@ -40,4 +40,3 @@ module BasicService
     self
   end
 end
-w

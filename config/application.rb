@@ -6,6 +6,6 @@ class Application
   end
 
   def self.environment
-    File.fetch('RACK_ENV').to_sym
+    ENV.fetch('RACK_ENV').to_sym
   end
 end

@@ -44,7 +44,6 @@ class Application < Roda
         r.post do
           ad_values = JSON(request.body.read)
           ad_params = validate_with!(GeocodeParamsContract, values: ad_values)
-          # Ads::UpdateCoordinatesService.call(ad_params.values.to_h)
           Workers::EnqueueCoordinatesUpdate.perform_async(ad_params.values.to_h)
 
           response['Content-Type'] = 'application/json'

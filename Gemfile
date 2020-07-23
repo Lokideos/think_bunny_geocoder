@@ -22,6 +22,8 @@ gem 'fast_jsonapi', '~> 1.5'
 gem 'faraday', '~> 1.0.0'
 gem 'faraday_middleware', '~> 1.0.0'
 
+gem 'sidekiq', '~> 6.1.0'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'rack-unreloader', '~> 1.7.0'

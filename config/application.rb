@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 class Application < Roda
   def self.root
     File.expand_path('..', __dir__)
@@ -33,12 +35,17 @@ class Application < Roda
       { status: 'ok' }.to_json
     end
 
+    r.on 'sidekiq' do
+      r.run Sidekiq::Web
+    end
+
     r.on 'v1' do
       r.on 'geocode' do
         r.post do
           ad_values = JSON(request.body.read)
           ad_params = validate_with!(GeocodeParamsContract, values: ad_values)
-          Ads::UpdateCoordinatesService.call(ad_params.values.to_h)
+          # Ads::UpdateCoordinatesService.call(ad_params.values.to_h)
+          Workers::EnqueueCoordinatesUpdate.perform_async(ad_params.values.to_h)
 
           response['Content-Type'] = 'application/json'
           response.status = 200

@@ -12,4 +12,7 @@ end
 Dir[Application.root.concat('/spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
+  config.include Rack::Test::Methods
+  config.include RouteHelpers, type: :routes
+  config.include ClientHelpers, type: :client
 end

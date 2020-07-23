@@ -32,4 +32,7 @@ end
 group :test do
   gem 'rspec', '~> 3.9.0'
   gem 'factory_bot', '~> 5.2.0'
+  gem 'rack-test', '~> 1.1.0'
+  gem 'rspec-sidekiq', '~> 3.0.3'
+  gem 'mock_redis', '~> 0.22.0'
 end

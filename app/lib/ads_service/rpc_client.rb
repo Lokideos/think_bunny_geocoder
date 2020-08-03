@@ -44,7 +44,7 @@ module AdsService
       @lock.synchronize do
         @queue.publish(
           payload,
-          opts.merge(app_id: 'geocoder',
+          opts.merge(app_id: Settings.app.name,
                      correlation_id: @correlation_id,
                      reply_to: @reply_queue.name)
         )

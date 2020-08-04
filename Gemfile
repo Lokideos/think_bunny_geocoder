@@ -20,6 +20,7 @@ gem 'fast_jsonapi', '~> 1.5'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'amazing_print'
 end
 
 group :test do

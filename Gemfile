@@ -10,6 +10,7 @@ gem 'i18n', '~> 1.8.2'
 gem 'config', '~> 2.2.1'
 
 gem 'bunny', '~> 2.15.0'
+gem 'ougai', '~> 1.8.5'
 
 gem 'dry-initializer', '~> 3.0.3'
 gem 'dry-validation', '~> 1.5.0'
@@ -19,6 +20,7 @@ gem 'fast_jsonapi', '~> 1.5'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'amazing_print'
 end
 
 group :test do

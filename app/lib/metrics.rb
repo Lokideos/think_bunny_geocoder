@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Metrics
-  module_function
+  extend self
 
   def configure
     registry = Prometheus::Client.registry

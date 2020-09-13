@@ -6,10 +6,15 @@ module ApplicationLoader
   def load_app!
     init_config
     require_app
+    init_prometheus
     init_app
   end
 
   private
+
+  def init_prometheus
+    require_file 'config/initializers/prometheus'
+  end
 
   def init_config
     require_file 'config/initializers/config'

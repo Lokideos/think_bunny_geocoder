@@ -9,4 +9,9 @@ Metrics.configure do |registry|
     docstring: 'The total number of geocoding requests.',
     labels: %i[result]
   )
+  registry.histogram(
+    :geocoding_request_seconds_response,
+    docstring: 'Histogram representation of geocoding response in seconds',
+    labels: %i[time]
+  )
 end

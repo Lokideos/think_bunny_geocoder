@@ -78,7 +78,7 @@ GEM
       pry (~> 0.13.0)
     puma (4.3.6)
       nio4r (~> 2.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rake (13.0.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
